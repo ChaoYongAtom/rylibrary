@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="pickerview_timebtn_nor">#057dff</color>
+    <color name="pickerview_timebtn_pre">#c2daf5</color>
+    <color name="pickerview_bg_topbar">#f5f5f5</color>
+    <color name="pickerview_topbar_title">#000000</color>
+    <color name="pickerview_wheelview_textcolor_out">#a8a8a8</color>
+    <color name="pickerview_wheelview_textcolor_center">#2a2a2a</color>
+    <color name="pickerview_wheelview_textcolor_divider">#d5d5d5</color>
+    <!--导航栏、列表、输入框、文本-->
+
+    <!--强调色-->
+    <color name="emphasize_color">#ffa70e</color>
+    <color name="post_text_color">#ff8b22</color>
+    <!--分割线颜色-->
+    <color name="divider_line_color">#e5e5e5</color>
+</resources>
