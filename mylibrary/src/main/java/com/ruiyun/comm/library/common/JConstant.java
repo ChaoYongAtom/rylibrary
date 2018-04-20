@@ -12,7 +12,7 @@ import org.wcy.android.utils.RxTool;
  */
 public class JConstant {
     public final static int INTERVAL = 1000;  //间隔时间（毫秒）
-    public final static int MIN_PAGE_ROWS = 10;
+    public final static int MIN_PAGE_ROWS = 20;
     public final static int MAX_PAGE_ROWS = 20;
     public final static String bundleListName = "baseListData";
     private static boolean encrypt = true;

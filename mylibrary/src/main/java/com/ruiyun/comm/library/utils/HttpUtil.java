@@ -128,6 +128,7 @@ public class HttpUtil implements HttpOnNextListener {
                             }
                             baseResult.setData(dataJson);
                         }
+                        Log.i("AESOperatorresult", dataJson);
                         LogUtils.json(dataJson);
                         if (api.isList()) {
                             baseResult.setResult(JSONObject.parseArray(dataJson, api.getData()));

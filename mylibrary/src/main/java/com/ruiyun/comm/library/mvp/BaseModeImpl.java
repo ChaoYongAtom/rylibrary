@@ -8,6 +8,7 @@ import com.ruiyun.comm.library.api.entitys.BaseResult;
 import com.ruiyun.comm.library.utils.HttpUtil;
 
 import org.wcy.android.retrofit.exception.ApiException;
+import org.wcy.android.utils.RxKeyboardTool;
 
 /**
  * Created by wcy on 2018/1/19.
@@ -43,6 +44,7 @@ public class BaseModeImpl implements BaseView {
     public void sendPost(String method, JSONObject parameters, Class<?> cl, boolean isList, boolean isShowProgress, String toast) {
         if (httpUtil == null)
             httpUtil = new HttpUtil(appCompatActivity, this);
+         RxKeyboardTool.hideSoftInput(appCompatActivity);
         httpUtil.send(method, parameters, cl, isList, isShowProgress, toast);
     }
 
