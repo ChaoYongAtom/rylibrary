@@ -17,15 +17,10 @@ import org.wcy.android.utils.RxKeyboardTool;
 public class BaseModeImpl implements BaseView {
     private BaseView onListener;
     private AppCompatActivity appCompatActivity;
-    private HttpUtil httpUtil;
 
     public void attachPresenter(BaseView view, AppCompatActivity activity) {
         onListener = view;
         appCompatActivity = activity;
-    }
-
-    public AppCompatActivity getAppCompatActivity() {
-        return appCompatActivity;
     }
 
 
@@ -42,9 +37,8 @@ public class BaseModeImpl implements BaseView {
     }
 
     public void sendPost(String method, JSONObject parameters, Class<?> cl, boolean isList, boolean isShowProgress, String toast) {
-        if (httpUtil == null)
-            httpUtil = new HttpUtil(appCompatActivity, this);
-         RxKeyboardTool.hideSoftInput(appCompatActivity);
+        HttpUtil httpUtil = new HttpUtil(appCompatActivity, this);
+        RxKeyboardTool.hideSoftInput(appCompatActivity);
         httpUtil.send(method, parameters, cl, isList, isShowProgress, toast);
     }
 
