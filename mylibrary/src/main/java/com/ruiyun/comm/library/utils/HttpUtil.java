@@ -64,10 +64,12 @@ public class HttpUtil implements HttpOnNextListener {
             if (RxDataTool.isNullString(heards)) {
                 try {
                     JSONObject object = new JSONObject();
+                    String http = JConstant.getHttpUrl();
                     object.put("systemType", "1");
                     object.put("appVersion", RxActivityTool.getAppVersionCode(application));
                     object.put("mobileCode", ExampleUtil.getImei(application));
-                    object.put("version", JConstant.getVersionName());
+                    if (!RxDataTool.isNullString(http))
+                        object.put("version", http.substring(http.indexOf("version"), http.lastIndexOf("/")));
                     object.put("registrationID", JConstant.getRegistrationID());
                     if (JConstant.isEncrypt()) {
                         heards = AESOperator.encrypt(object.toJSONString());
