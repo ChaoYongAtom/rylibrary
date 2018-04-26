@@ -19,13 +19,12 @@ public class JConstant {
     public final static String heards = "heards";
     private static LoinOutInterface loinOutInterface;
     private static String httpUrl;
-    private static String versionName;
     private static String token;
     private static Class httpPostService;
     private static String registrationID;
 
     public static boolean isEncrypt() {
-        return encrypt;
+        return JConstant.encrypt;
     }
 
     public static void setEncrypt(boolean encrypt) {
@@ -43,14 +42,6 @@ public class JConstant {
 
     public interface LoinOutInterface {
         public void loginOut();
-    }
-
-    public static String getVersionName() {
-        return versionName;
-    }
-
-    public static void setVersionName(String versionName) {
-        JConstant.versionName = versionName;
     }
 
     public static String getToken() {

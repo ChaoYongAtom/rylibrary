@@ -26,6 +26,6 @@ android {
 }
 
 dependencies {
-    compile 'com.github.ChaoYongAtom:applibrary:0.0.6.4'
+    compile 'com.github.ChaoYongAtom:applibrary:0.0.6.5'
     compile 'com.zyao89:zloading:1.0.11'
 }
