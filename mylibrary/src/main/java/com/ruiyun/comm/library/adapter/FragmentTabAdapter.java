@@ -3,6 +3,7 @@ package com.ruiyun.comm.library.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.RadioGroup;
 
 import com.ruiyun.comm.library.utils.TurnFragmentUtil;
@@ -15,7 +16,7 @@ import java.util.List;
 public class FragmentTabAdapter implements RadioGroup.OnCheckedChangeListener {
     private List<Fragment> fragments; // 一个tab页面对应一个Fragment
     private RadioGroup rgs; // 用于切换tab
-    private FragmentManager fragmentManager; // Fragment所属的Activity
+    private FragmentManager mfragmentManager; // Fragment所属的Activity
     private int fragmentContentId; // Activity中所要被替换的区域的id
     private int currentTab = 0; // 当前Tab页面索引
     private OnRgsExtraCheckedChangedListener onRgsExtraCheckedChangedListener; // 用于让调用者在切换tab时候增加新的功能
@@ -26,19 +27,30 @@ public class FragmentTabAdapter implements RadioGroup.OnCheckedChangeListener {
         init(fragmentManager, fragments, fragmentContentId, rgs);
     }
 
+    public FragmentTabAdapter(AppCompatActivity appCompatActivity, List<Fragment> fragments, int
+            fragmentContentId, RadioGroup rgs) {
+        init(appCompatActivity.getSupportFragmentManager(), fragments, fragmentContentId, rgs);
+    }
+
     public FragmentTabAdapter(FragmentManager fragmentManager, List<Fragment> fragments, int
             fragmentContentId, RadioGroup rgs, int currentTab) {
         this.currentTab = currentTab;
         init(fragmentManager, fragments, fragmentContentId, rgs);
     }
 
+    public FragmentTabAdapter(AppCompatActivity appCompatActivity, List<Fragment> fragments, int
+            fragmentContentId, RadioGroup rgs, int currentTab) {
+        this.currentTab = currentTab;
+        init(appCompatActivity.getSupportFragmentManager(), fragments, fragmentContentId, rgs);
+    }
+
     private void init(FragmentManager fragmentManager, List<Fragment> fragments, int fragmentContentId,
                       RadioGroup rgs) {
         this.fragments = fragments;
         this.rgs = rgs;
-        this.fragmentManager = fragmentManager;
+        this.mfragmentManager = fragmentManager;
         this.fragmentContentId = fragmentContentId;
-        currentTab = TurnFragmentUtil.showTab(fragmentContentId, -1, currentTab, fragments, fragmentManager,isShoWanimation);
+        currentTab = TurnFragmentUtil.showTab(fragmentContentId, -1, currentTab, fragments, fragmentManager, isShoWanimation);
         rgs.setOnCheckedChangeListener(this);
     }
 
@@ -49,10 +61,11 @@ public class FragmentTabAdapter implements RadioGroup.OnCheckedChangeListener {
         }
         for (int i = 0; i < rgs.getChildCount(); i++) {
             if (rgs.getChildAt(i).getId() == checkedId) {
-                currentTab = TurnFragmentUtil.showTab(fragmentContentId, i, currentTab, fragments, fragmentManager,isShoWanimation);
+                currentTab = TurnFragmentUtil.showTab(fragmentContentId, i, currentTab, fragments, mfragmentManager, isShoWanimation);
             }
         }
     }
+
     public int getCurrentTab() {
         return currentTab;
     }
