@@ -24,7 +24,7 @@ public abstract class BaseMVPActivity<T extends BasePresenter, M extends BaseMod
         presenter = ParameterizedTypeUtil.init(this, this, this);
     }
     @Override
-    public void onDestroy() {
+    protected void onDestroy() {
         if (presenter != null) presenter.onDettach();
         super.onDestroy();
     }

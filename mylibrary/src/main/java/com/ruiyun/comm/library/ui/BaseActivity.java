@@ -108,7 +108,7 @@ public abstract class BaseActivity extends RxAppCompatActivity implements BaseVi
     }
 
     protected void setStatusBar() {
-        StatusBarUtil.setColor(this, getResources().getColor(R.color.white));
+        StatusBarUtil.setColor(this, getResources().getColor(R.color.white40),40);
     }
 
 
