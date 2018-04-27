@@ -81,7 +81,7 @@ public class HttpUtil implements HttpOnNextListener {
                     e.printStackTrace();
                 }
             }
-            Log.i("heards====", heards);
+            Log.d("heards====", heards);
         }
         return heards;
     }
@@ -103,14 +103,14 @@ public class HttpUtil implements HttpOnNextListener {
         if (progressDialogView != null) {
             progressDialogView.setMsg(toast);
         }
-        LogUtils.d("http------------->" + postEntity.getBaseUrl() + "/" + method + "/" + (parameters == null ? "" : parameters.toJSONString()));
+        Log.d("http------------->", postEntity.getBaseUrl() + "/" + method + "/" + (parameters == null ? "" : parameters.toJSONString()));
         manager.doHttpDeal(postEntity);
     }
 
     @Override
     public void onNext(BaseApi api, String result) {
         try {
-            LogUtils.d("result------------->", result);
+            Log.d("result------------->", result);
             BaseResult baseResult = JSONObject.parseObject(result, BaseResult.class);
             if (baseResult == null) {
                 baseResult = new BaseResult();
@@ -130,7 +130,7 @@ public class HttpUtil implements HttpOnNextListener {
                             }
                             baseResult.setData(dataJson);
                         }
-                        Log.i("AESOperatorresult", dataJson);
+                        Log.d("AESOperatorresult", dataJson);
                         LogUtils.json(dataJson);
                         if (api.isList()) {
                             baseResult.setResult(JSONObject.parseArray(dataJson, api.getData()));

@@ -62,6 +62,8 @@ public class BasePresenter<V extends BaseView, M extends BaseModel> {
     public void onDettach() {
         if (null != mViewRef) {
             mViewRef.clear();
+            baseMode=null;
+            mModel=null;
             mViewRef = null;
         }
     }

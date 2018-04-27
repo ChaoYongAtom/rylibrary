@@ -23,4 +23,9 @@ public abstract class BaseMVPActivity<T extends BasePresenter, M extends BaseMod
         //内部获取第一个类型参数的真实类型  ，反射new出对象
         presenter = ParameterizedTypeUtil.init(this, this, this);
     }
+    @Override
+    public void onDestroy() {
+        if (presenter != null) presenter.onDettach();
+        super.onDestroy();
+    }
 }

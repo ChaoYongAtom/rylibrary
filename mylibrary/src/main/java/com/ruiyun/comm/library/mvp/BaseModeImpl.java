@@ -17,7 +17,7 @@ import org.wcy.android.utils.RxKeyboardTool;
 public class BaseModeImpl implements BaseView {
     private BaseView onListener;
     private AppCompatActivity appCompatActivity;
-    HttpUtil httpUtil;
+    private HttpUtil httpUtil;
 
     public void attachPresenter(BaseView view, AppCompatActivity activity) {
         onListener = view;

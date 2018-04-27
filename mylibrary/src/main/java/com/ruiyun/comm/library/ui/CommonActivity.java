@@ -66,8 +66,4 @@ public class CommonActivity extends BaseActivity implements BackHandledInterface
             finishActivity();
         }
     }
-
-    public void backBtnClick(View v) {
-        onBackPressed();
-    }
 }
