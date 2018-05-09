@@ -2,12 +2,10 @@ package com.ruiyun.comm.library.utils;
 
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.apkfuns.logutils.LogUtils;
 import com.ruiyun.comm.library.api.SubjectPostApi;
 import com.ruiyun.comm.library.api.entitys.BaseResult;
 import com.ruiyun.comm.library.common.JConstant;
@@ -24,6 +22,7 @@ import org.wcy.android.utils.ExampleUtil;
 import org.wcy.android.utils.PreferenceUtils;
 import org.wcy.android.utils.RxActivityTool;
 import org.wcy.android.utils.RxDataTool;
+import org.wcy.android.utils.RxLogTool;
 import org.wcy.android.view.dialog.RxDialogSure;
 
 import java.math.BigDecimal;
@@ -81,7 +80,7 @@ public class HttpUtil implements HttpOnNextListener {
                     e.printStackTrace();
                 }
             }
-            Log.d("heards====", heards);
+            RxLogTool.d("heards====", heards);
         }
         return heards;
     }
@@ -103,14 +102,14 @@ public class HttpUtil implements HttpOnNextListener {
         if (progressDialogView != null) {
             progressDialogView.setMsg(toast);
         }
-        Log.d("http------------->", postEntity.getBaseUrl() + "/" + method + "/" + (parameters == null ? "" : parameters.toJSONString()));
         manager.doHttpDeal(postEntity);
     }
 
     @Override
     public void onNext(BaseApi api, String result) {
         try {
-            Log.d("result------------->", result);
+            RxLogTool.d("result------------->", result);
+            RxLogTool.d("HttpMethod", api.getMethod());
             BaseResult baseResult = JSONObject.parseObject(result, BaseResult.class);
             if (baseResult == null) {
                 baseResult = new BaseResult();
@@ -130,8 +129,8 @@ public class HttpUtil implements HttpOnNextListener {
                             }
                             baseResult.setData(dataJson);
                         }
-                        Log.d("AESOperatorresult", dataJson);
-                        LogUtils.json(dataJson);
+                        RxLogTool.d("AESOperatorresult", dataJson);
+                        RxLogTool.dJson(dataJson);
                         if (api.isList()) {
                             baseResult.setResult(JSONObject.parseArray(dataJson, api.getData()));
                         } else {
