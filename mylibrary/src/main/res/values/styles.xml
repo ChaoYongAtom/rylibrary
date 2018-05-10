@@ -4,12 +4,12 @@
     <style name="titleType">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">50dp</item>
-        <item name="com.yuejia.app.friendscloud:hlItemTextSize">@dimen/sp_15</item>
-        <item name="com.yuejia.app.friendscloud:hlTitleTextSize">24sp</item>
-        <item name="com.yuejia.app.friendscloud:hlItemTextColor">#333333</item>
-        <item name="com.yuejia.app.friendscloud:hlTitleTextColor">#333333</item>
-        <item name="com.yuejia.app.friendscloud:hlNavigationIcon">@mipmap/back_black_ico</item>
-        <item name="com.yuejia.app.friendscloud:hlItemMarginLeftAndRight">@dimen/dp_10</item>
-        <item name="com.yuejia.app.friendscloud:hlItemTextPaddingLeftAndRight">@dimen/dp_10</item>
+        <item name="org.wcy.android:hlItemTextSize">@dimen/sp_15</item>
+        <item name="org.wcy.android:hlTitleTextSize">24sp</item>
+        <item name="org.wcy.android:hlItemTextColor">#333333</item>
+        <item name="org.wcy.android:hlTitleTextColor">#333333</item>
+        <item name="org.wcy.android:hlNavigationIcon">@mipmap/back_black_ico</item>
+        <item name="org.wcy.android:hlItemMarginLeftAndRight">@dimen/dp_10</item>
+        <item name="org.wcy.android:hlItemTextPaddingLeftAndRight">@dimen/dp_10</item>
     </style>
 </resources>
