@@ -58,7 +58,27 @@ public class BasePresenter<V extends BaseView, M extends BaseModel> {
         baseMode.attachPresenter(getView(), appCompatActivity);
         baseMode.sendPost(method, parameters, cl, isList, isShowProgress, toast);
     }
-
+    public void sendPost(String method, JSONObject parameters, Class<?> cl, boolean isList, boolean isShowProgress) {
+        sendPost(method,parameters,cl,isList,isShowProgress,null);
+    }
+    public void sendPost(String method, JSONObject parameters, Class<?> cl, boolean isList) {
+        sendPost(method,parameters,cl,isList,true,null);
+    }
+    /**
+     * 无presenter下使用，请他情况下禁止调用
+     * 图片上传
+     * @param path
+     */
+    public void upload(String path){
+        if (baseMode == null) baseMode = new BaseModeImpl();
+        baseMode.attachPresenter(getView(), appCompatActivity);
+        baseMode.upload(path);
+    }
+    public void upload(byte[] path){
+        if (baseMode == null) baseMode = new BaseModeImpl();
+        baseMode.attachPresenter(getView(), appCompatActivity);
+        baseMode.upload(path);
+    }
     public void onDettach() {
         if (null != mViewRef) {
             mViewRef.clear();

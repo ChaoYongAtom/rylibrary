@@ -2,10 +2,13 @@ package com.ruiyun.comm.library.api;
 
 
 import com.alibaba.fastjson.JSONObject;
+import com.apkfuns.logutils.LogUtils;
 import com.ruiyun.comm.library.common.JConstant;
 
 import org.wcy.android.retrofit.Api.BaseApi;
 import org.wcy.android.utils.AESOperator;
+import org.wcy.android.utils.RxActivityTool;
+import org.wcy.android.utils.RxTool;
 
 import java.util.HashMap;
 
@@ -43,6 +46,9 @@ public class SubjectPostApi extends BaseApi {
             String params = "";
             String token = JConstant.getToken();
             if (parameters != null) {
+                if(RxActivityTool.isAppDebug(RxTool.getContext())){
+                    LogUtils.json(parameters.toJSONString());
+                }
                 if (JConstant.isEncrypt()) {
                     params = AESOperator.encrypt(parameters.toJSONString());
                 } else {

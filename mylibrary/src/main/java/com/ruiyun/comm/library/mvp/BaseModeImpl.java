@@ -18,6 +18,7 @@ public class BaseModeImpl implements BaseView {
     private BaseView onListener;
     private AppCompatActivity appCompatActivity;
     HttpUtil httpUtil;
+
     public void attachPresenter(BaseView view, AppCompatActivity activity) {
         onListener = view;
         appCompatActivity = activity;
@@ -42,6 +43,14 @@ public class BaseModeImpl implements BaseView {
         httpUtil.send(method, parameters, cl, isList, isShowProgress, toast);
     }
 
+    public void upload(String path) {
+        httpUtil = new HttpUtil(appCompatActivity, this);
+        httpUtil.upload(path);
+    }
+    public void upload(byte[] path) {
+        httpUtil = new HttpUtil(appCompatActivity, this);
+        httpUtil.upload(path);
+    }
     @Override
     public void onNext(BaseResult result) {
         onListener.onNext(result);

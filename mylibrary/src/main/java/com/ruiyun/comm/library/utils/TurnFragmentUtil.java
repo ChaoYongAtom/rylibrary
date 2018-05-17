@@ -30,7 +30,7 @@ public class TurnFragmentUtil extends RxFragmentUtil {
         context.startActivity(intent);
     }
 
-    public static void startFragmentForResult(FragmentActivity activity, Class cl, Bundle bundle, Integer requestCode) {
+    public static void startFragmentForResult(AppCompatActivity activity, Class cl, Bundle bundle, Integer requestCode) {
 
         Intent intent = new Intent(activity, CommonActivity.class);
         intent.putExtra(CommonActivity.EXTRA_FRAGMENT, cl.getName());

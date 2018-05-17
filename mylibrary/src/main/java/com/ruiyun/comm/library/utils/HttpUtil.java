@@ -7,7 +7,9 @@ import android.view.View;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.ruiyun.comm.library.api.SubjectPostApi;
+import com.ruiyun.comm.library.api.UploadApi;
 import com.ruiyun.comm.library.api.entitys.BaseResult;
+import com.ruiyun.comm.library.api.entitys.UpdateImage;
 import com.ruiyun.comm.library.common.JConstant;
 import com.ruiyun.comm.library.mvp.BaseView;
 import com.ruiyun.comm.library.widget.ProgressDialogView;
@@ -23,6 +25,7 @@ import org.wcy.android.utils.PreferenceUtils;
 import org.wcy.android.utils.RxActivityTool;
 import org.wcy.android.utils.RxDataTool;
 import org.wcy.android.utils.RxLogTool;
+import org.wcy.android.utils.RxTool;
 import org.wcy.android.view.dialog.RxDialogSure;
 
 import java.math.BigDecimal;
@@ -43,6 +46,7 @@ public class HttpUtil implements HttpOnNextListener {
     ProgressDialogView progressDialogView;
     private BaseView httpOnListener;
     private static String heards = null;
+    private UploadApi uplaodApi;
 
     public HttpUtil(AppCompatActivity activity, BaseView onListener) {
         this.application = activity;
@@ -105,6 +109,21 @@ public class HttpUtil implements HttpOnNextListener {
         manager.doHttpDeal(postEntity);
     }
 
+    /**
+     * 图片上传
+     *
+     * @param path 图片路径
+     */
+    public void upload(String path) {
+        if (uplaodApi == null) uplaodApi = new UploadApi();
+        uplaodApi.setFile(path);
+        manager.doHttpDeal(uplaodApi);
+    }
+    public void upload(byte[] path) {
+        if (uplaodApi == null) uplaodApi = new UploadApi();
+        uplaodApi.setByte(path);
+        manager.doHttpDeal(uplaodApi);
+    }
     @Override
     public void onNext(BaseApi api, String result) {
         try {
@@ -134,17 +153,21 @@ public class HttpUtil implements HttpOnNextListener {
                         if (api.isList()) {
                             baseResult.setResult(JSONObject.parseArray(dataJson, api.getData()));
                         } else {
-                            if (api.getData() == BigDecimal.class || api.getData() == String.class || api.getData() == Integer.class) {
-                                dataJson = getData(dataJson);
-                            }
-                            if (api.getData() == BigDecimal.class) {
-                                baseResult.setResult(new BigDecimal(dataJson));
-                            } else if (api.getData() == String.class) {
-                                baseResult.setResult(dataJson);
-                            } else if (api.getData() == Integer.class) {
-                                baseResult.setResult(Integer.parseInt(dataJson));
+                            if (uplaodApi != null && api.getMethod().equals("")) {
+                                baseResult.setResult(JSONObject.parseObject(dataJson, UpdateImage.class));
                             } else {
-                                baseResult.setResult(JSONObject.parseObject(dataJson, api.getData()));
+                                if (api.getData() == BigDecimal.class || api.getData() == String.class || api.getData() == Integer.class) {
+                                    dataJson = getData(dataJson);
+                                }
+                                if (api.getData() == BigDecimal.class) {
+                                    baseResult.setResult(new BigDecimal(dataJson));
+                                } else if (api.getData() == String.class) {
+                                    baseResult.setResult(dataJson);
+                                } else if (api.getData() == Integer.class) {
+                                    baseResult.setResult(Integer.parseInt(dataJson));
+                                } else {
+                                    baseResult.setResult(JSONObject.parseObject(dataJson, api.getData()));
+                                }
                             }
                         }
 
@@ -172,6 +195,7 @@ public class HttpUtil implements HttpOnNextListener {
             }
         } catch (Exception e) {
             e.printStackTrace();
+            RxLogTool.e("HttpUtilonNext",api.getMethod());
             httpOnListener.onError(new ApiException(null, CodeException.ERROR, "数据处理异常，请稍后再试"), api.getMethod());
         }
     }
