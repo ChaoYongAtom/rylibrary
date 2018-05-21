@@ -27,7 +27,7 @@ import butterknife.Unbinder;
 public abstract class LibFragment extends Fragment implements BaseView {
     protected BackHandledInterface mBackHandledInterface;
     private BaseActivity activity;
-    protected HeaderLayout headerLayout;
+    private HeaderLayout headerLayout;
     private Unbinder unbinder;
     protected View rootView;
 

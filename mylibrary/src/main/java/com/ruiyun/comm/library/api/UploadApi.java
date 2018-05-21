@@ -22,10 +22,10 @@ import rx.Observable;
 public class UploadApi extends BaseApi {
     /*需要上传的文件*/
     private MultipartBody.Part part;
-
+    public static final String UPLOADMETHOD="UPLOADMETHOD";
     public UploadApi() {
         setShowProgress(false);
-        setMethod("");
+        setMethod(UPLOADMETHOD);
         setMsg("图片上传中......");
         setData(UpdateImage.class);
     }
