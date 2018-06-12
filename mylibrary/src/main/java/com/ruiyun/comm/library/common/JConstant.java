@@ -1,12 +1,5 @@
 package com.ruiyun.comm.library.common;
-
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
-import android.os.Bundle;
-
 import org.wcy.android.utils.RxDataTool;
-import org.wcy.android.utils.RxTool;
-
 /**
  * 系统变量
  */
@@ -57,15 +50,6 @@ public class JConstant {
     }
 
     public static String getHttpUrl() {
-        if (RxDataTool.isNullString(httpUrl)) {
-            try {
-                ApplicationInfo appInfo = RxTool.getContext().getPackageManager().getApplicationInfo(RxTool.getContext().getPackageName(), PackageManager.GET_META_DATA);
-                Bundle bundle = appInfo.metaData;
-                httpUrl = bundle.getString("HTTP_URL");
-            } catch (Exception e) {
-
-            }
-        }
         return httpUrl;
     }
 
