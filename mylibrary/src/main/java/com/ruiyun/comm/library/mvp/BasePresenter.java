@@ -53,37 +53,47 @@ public class BasePresenter<V extends BaseView, M extends BaseModel> {
      * @param isShowProgress
      * @param toast
      */
-    public void sendPost(String method, JSONObject parameters, Class<?> cl, boolean isList, boolean isShowProgress, String toast) {
+    public void sendPost(String method, JSONObject parameters, Class<?> cl, boolean isList, boolean isShowProgress, String toast, int connectionTime) {
         if (baseMode == null) baseMode = new BaseModeImpl();
         baseMode.attachPresenter(getView(), appCompatActivity);
-        baseMode.sendPost(method, parameters, cl, isList, isShowProgress, toast);
+        baseMode.sendPost(method, parameters, cl, isList, isShowProgress, toast, connectionTime);
     }
+
+    public void sendPost(String method, JSONObject parameters, Class<?> cl, boolean isList, boolean isShowProgress, String toast) {
+        sendPost(method, parameters, cl, isList, isShowProgress, toast, 0);
+    }
+
     public void sendPost(String method, JSONObject parameters, Class<?> cl, boolean isList, boolean isShowProgress) {
-        sendPost(method,parameters,cl,isList,isShowProgress,null);
+        sendPost(method, parameters, cl, isList, isShowProgress, null);
     }
+
     public void sendPost(String method, JSONObject parameters, Class<?> cl, boolean isList) {
-        sendPost(method,parameters,cl,isList,true,null);
+        sendPost(method, parameters, cl, isList, true, null);
     }
+
     /**
      * 无presenter下使用，请他情况下禁止调用
      * 图片上传
+     *
      * @param path
      */
-    public void upload(String path){
+    public void upload(String path) {
         if (baseMode == null) baseMode = new BaseModeImpl();
         baseMode.attachPresenter(getView(), appCompatActivity);
         baseMode.upload(path);
     }
-    public void upload(byte[] path){
+
+    public void upload(byte[] path) {
         if (baseMode == null) baseMode = new BaseModeImpl();
         baseMode.attachPresenter(getView(), appCompatActivity);
         baseMode.upload(path);
     }
+
     public void onDettach() {
         if (null != mViewRef) {
             mViewRef.clear();
-            baseMode=null;
-            mModel=null;
+            baseMode = null;
+            mModel = null;
             mViewRef = null;
         }
     }

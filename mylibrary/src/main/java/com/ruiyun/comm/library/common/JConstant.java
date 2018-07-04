@@ -1,5 +1,7 @@
 package com.ruiyun.comm.library.common;
+
 import org.wcy.android.utils.RxDataTool;
+
 /**
  * 系统变量
  */
@@ -15,6 +17,9 @@ public class JConstant {
     private static String token;
     private static Class httpPostService;
     private static String registrationID;
+    private static int connectionTime = 6;
+    /* retry次数*/
+    private static int retry = 2;
 
     public static boolean isEncrypt() {
         return JConstant.encrypt;
@@ -55,6 +60,22 @@ public class JConstant {
 
     public static Class getHttpPostService() {
         return httpPostService;
+    }
+
+    public static int getConnectionTime() {
+        return connectionTime;
+    }
+
+    public static void setConnectionTime(int connectionTime) {
+        JConstant.connectionTime = connectionTime;
+    }
+
+    public static int getRetry() {
+        return retry;
+    }
+
+    public static void setRetry(int retry) {
+        JConstant.retry = retry;
     }
 
     public static String getRegistrationID() {

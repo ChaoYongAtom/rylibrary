@@ -77,8 +77,8 @@ public abstract class ChangeTimeDialogUtils {
 
 
         View viewLine = alertDialog.findViewById(R.id.view_line);
-        LinearLayout layoutHour =alertDialog.findViewById(R.id.llayout_hour);
-        LinearLayout layoutMinte =alertDialog.findViewById(R.id.llout_minte);
+        LinearLayout layoutHour = alertDialog.findViewById(R.id.llayout_hour);
+        LinearLayout layoutMinte = alertDialog.findViewById(R.id.llout_minte);
 
         if (!isShowTime) {
             viewLine.setVisibility(View.GONE);
@@ -135,7 +135,7 @@ public abstract class ChangeTimeDialogUtils {
         numPicker_day.setMinValue(1);
         numPicker_day.setMaxValue(getDaysOfCurMonth());
         int day1 = DateUtil.getDateDay(data);
-        if (RxDataTool.isNullString(showData)) {
+        if (RxDataTool.isNullString(showData) && day1 > 1) {
             day1--;
         }
         numPicker_day.setValue(day1);
@@ -149,7 +149,7 @@ public abstract class ChangeTimeDialogUtils {
             hour = format(DateUtil.getDateHour(DateUtil.toDateTime(data, DateUtil.DF_YYYY_MM_DD_HH_MM)));
             minte = format(DateUtil.getDateMinute(DateUtil.toDateTime(data, DateUtil.DF_YYYY_MM_DD_HH_MM)));
             //时
-            ChangeTextStyleNumberPicker numPicker_hour =alertDialog.findViewById(R.id.numPicker_hour);
+            ChangeTextStyleNumberPicker numPicker_hour = alertDialog.findViewById(R.id.numPicker_hour);
             numPicker_hour.setNumberPickerDividerColor(numPicker_hour);
             numPicker_hour.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
             numPicker_hour.setWrapSelectorWheel(false);
@@ -163,7 +163,7 @@ public abstract class ChangeTimeDialogUtils {
                 }
             });
             //分
-            ChangeTextStyleNumberPicker numPicker_min =alertDialog.findViewById(R.id.numPicker_min);
+            ChangeTextStyleNumberPicker numPicker_min = alertDialog.findViewById(R.id.numPicker_min);
             numPicker_min.setNumberPickerDividerColor(numPicker_min);
             numPicker_min.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
             numPicker_min.setWrapSelectorWheel(false);
@@ -213,6 +213,9 @@ public abstract class ChangeTimeDialogUtils {
             if (i == R.id.tv_dimss) {
                 alertDialog.dismiss();
             } else if (i == R.id.tv_sure) {
+                if (day.equals("00")) {
+                    day = "01";
+                }
                 if (isShowTime) {
                     changeedData(year + "-" + month + "-" + day + " " + hour + ":" + minte);
                 } else {

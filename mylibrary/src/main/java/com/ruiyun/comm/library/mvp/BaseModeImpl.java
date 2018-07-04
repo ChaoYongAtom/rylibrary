@@ -38,8 +38,13 @@ public class BaseModeImpl implements BaseView {
     }
 
     public void sendPost(String method, JSONObject parameters, Class<?> cl, boolean isList, boolean isShowProgress, String toast) {
+        sendPost(method, parameters, cl, isList, isShowProgress, toast, 0);
+    }
+
+    public void sendPost(String method, JSONObject parameters, Class<?> cl, boolean isList, boolean isShowProgress, String toast, int connectionTime) {
         httpUtil = new HttpUtil(appCompatActivity, this);
         RxKeyboardTool.hideSoftInput(appCompatActivity);
+        if (connectionTime > 0) httpUtil.setConnectionTime(connectionTime);
         httpUtil.send(method, parameters, cl, isList, isShowProgress, toast);
     }
 
@@ -47,10 +52,12 @@ public class BaseModeImpl implements BaseView {
         httpUtil = new HttpUtil(appCompatActivity, this);
         httpUtil.upload(path);
     }
+
     public void upload(byte[] path) {
         httpUtil = new HttpUtil(appCompatActivity, this);
         httpUtil.upload(path);
     }
+
     @Override
     public void onNext(BaseResult result) {
         onListener.onNext(result);

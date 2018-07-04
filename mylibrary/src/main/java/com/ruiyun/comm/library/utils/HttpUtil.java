@@ -54,8 +54,13 @@ public class HttpUtil implements HttpOnNextListener {
         manager = new HttpManager(activity, this, getHeaders());
         postEntity = new SubjectPostApi();
         postEntity.setBaseUrl(JConstant.getHttpUrl());
+        postEntity.setConnectionTime(JConstant.getConnectionTime());
         progressDialogView = new ProgressDialogView(activity);
         postEntity.setProgressDialog(progressDialogView);
+    }
+
+    public void setConnectionTime(int connectionTime) {
+        postEntity.setConnectionTime(connectionTime);
     }
 
     /**
@@ -119,16 +124,18 @@ public class HttpUtil implements HttpOnNextListener {
         uplaodApi.setFile(path);
         manager.doHttpDeal(uplaodApi);
     }
+
     public void upload(byte[] path) {
         if (uplaodApi == null) uplaodApi = new UploadApi();
         uplaodApi.setByte(path);
         manager.doHttpDeal(uplaodApi);
     }
+
     @Override
     public void onNext(BaseApi api, String result) {
         try {
-            RxLogTool.d("result------------->", result);
             RxLogTool.d("HttpMethod", api.getMethod());
+            RxLogTool.d("result------------->", result);
             BaseResult baseResult = JSONObject.parseObject(result, BaseResult.class);
             if (baseResult == null) {
                 baseResult = new BaseResult();
@@ -195,7 +202,7 @@ public class HttpUtil implements HttpOnNextListener {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            RxLogTool.e("HttpUtilonNext",api.getMethod());
+            RxLogTool.e("HttpUtilonNext", api.getMethod());
             httpOnListener.onError(new ApiException(null, CodeException.ERROR, "数据处理异常，请稍后再试"), api.getMethod());
         }
     }
