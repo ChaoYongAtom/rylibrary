@@ -121,12 +121,14 @@ public class HttpUtil implements HttpOnNextListener {
      */
     public void upload(String path) {
         if (uplaodApi == null) uplaodApi = new UploadApi();
+        uplaodApi.setBaseUrl(JConstant.getHttpUrl());
         uplaodApi.setFile(path);
         manager.doHttpDeal(uplaodApi);
     }
 
     public void upload(byte[] path) {
         if (uplaodApi == null) uplaodApi = new UploadApi();
+        uplaodApi.setBaseUrl(JConstant.getHttpUrl());
         uplaodApi.setByte(path);
         manager.doHttpDeal(uplaodApi);
     }
